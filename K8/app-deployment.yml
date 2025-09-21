@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticket-booking-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ticket-booking-app
+  template:
+    metadata:
+      labels:
+        app: ticket-booking-app
+    spec:
+      containers:
+      - name: ticket-booking-app
+        image: santoshkumar711/ticket-booking-app:v1  # apni Docker image ka naam yahan
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mariadb://mariadb:3306/ticket_booking"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "ticket_booking_system"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "santoor711"
+        - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
+          value: "org.mariadb.jdbc.Driver"
